@@ -1,0 +1,30 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+
+processors:
+  batch:
+
+exporters:
+  otlphttp:
+    endpoint: ${GRAFANA_URL}
+    headers:
+      Authorization: ${GRAFANA_AUTH}
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlphttp]
+
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlphttp]
+
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlphttp]
