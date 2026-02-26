@@ -15,7 +15,11 @@ exporters:
 service:
   pipelines:
     metrics:
-      receivers: [otlp]
+      receivers:
+  	otlp:
+    	protocols:
+      		http:
+        		endpoint: 0.0.0.0:4318
       processors: [batch]
       exporters: [otlphttp]
 
